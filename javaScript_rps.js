@@ -1,4 +1,5 @@
-
+let playerScore = 0;
+let computerScore = 0;
 
 function getComputerChoice() {
     let randomSelection = Math.floor(Math.random () * 3) + 1;
@@ -14,23 +15,59 @@ function getComputerChoice() {
 
 function playRound (playerSelection, computerSelection) {
 
-    if (playerSelection === 'ROCK' && computerSelection === 'PAPER') {
-        return "You Lose! Paper beats Rock,"; 
-        } else if (playerSelection === 'ROCK' && computerSelection === 'SCISSORS') {
-            return "You win! Rock beats Scissors."; 
-        } else if (playerSelection === 'SCISSORS' && computerSelection === 'PAPER') {
-            return "You win! Scissors beats Paper."; 
-        } else if (playerSelection === 'SCISSORS' && computerSelection === 'ROCK') {
-            return "You Lose! Rock beats Scissors.";
-        } else if (playerSelection === 'PAPER' && computerSelection === 'ROCK') {
-            return "You win! Paper beats Rock.";
-        } else if (playerSelection === 'PAPER' && computerSelection === 'SCISSORS') {
-            return "You Lose! Scissors beats Paper.";
-        } else {
-            return "It's a TIE!";
+    if (playerSelection === 'ROCK' && computerSelection === 'PAPER' || 
+    playerSelection === 'SCISSORS' && computerSelection === 'PAPER' || 
+    playerSelection === 'PAPER' && computerSelection === 'ROCK') {
+        console.log(`You Lose! ${computerSelection} beats ${playerSelection}.`);
+        computerScore++;
+        console.log(`Your score is: ${playerScore}`);
+    } else if (playerSelection === 'ROCK' && computerSelection === 'SCISSORS' ||
+              playerSelection === 'SCISSORS' && computerSelection === 'PAPER' || 
+              playerSelection === 'PAPER' && computerSelection === 'ROCK') {
+        console.log(`You win! ${playerSelection} beats ${computerSelection}.`);
+        playerScore++;
+        console.log(`Your score is: ${playerScore}`);
+    } else {
+        console.log("You tied! Nobody wins.");
         }   
     }
 
-const playerSelection = 'ROCK';
-const computerSelection = getComputerChoice();
-console.log(playRound(playerSelection,computerSelection));
+    function gameSelection() {
+        let playerChoice = prompt('Make your selection','');
+
+            if (playerChoice != 'ROCK' || playerChoice != 'PAPER' || playerChoice != 'SCISSORS') {
+                alert('Make another selection, your previous one was wrong');
+            }
+
+        playerChoice = playerChoice.toUpperCase();
+        computerSelection = getComputerChoice();
+        playerSelection = playerChoice;
+    }
+
+    function game() {
+
+        gameSelection()
+        playRound (playerSelection, computerSelection);
+        gameSelection();
+
+        playRound (playerSelection, computerSelection);
+        gameSelection();
+
+        playRound (playerSelection, computerSelection);
+        gameSelection();
+
+        playRound (playerSelection, computerSelection);
+        gameSelection();
+
+        playRound (playerSelection, computerSelection);
+
+        if (playerScore > computerScore) {
+            console.log("You win the game!")
+        } else if (playerScore === computerScore) {
+            console.log("It's a TIE, nobody win!")
+        } else {
+            console.log("Computer win the game");
+        }
+    }
+
+game();
