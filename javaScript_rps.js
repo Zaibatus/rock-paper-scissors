@@ -34,11 +34,6 @@ function playRound (playerSelection, computerSelection) {
 
     function gameSelection() {
         let playerChoice = prompt('Make your selection','');
-
-            if (playerChoice != 'ROCK' || playerChoice != 'PAPER' || playerChoice != 'SCISSORS') {
-                alert('Make another selection, your previous one was wrong');
-            }
-
         playerChoice = playerChoice.toUpperCase();
         computerSelection = getComputerChoice();
         playerSelection = playerChoice;
